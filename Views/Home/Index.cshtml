@@ -1,0 +1,83 @@
+﻿@model IEnumerable<endsem_project.Models.Todo>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Todo List </h1>
+
+<div class="card-body" style="margin-top:4rem;" id="PrimaryTasks">
+    <h2>Primary Tasks <a asp-action="CreatePrimary" class="btn btn-primary" style="margin-left:6rem">Add New</a></h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Where(t => t.Priority == "Primary")){
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TaskName)</td>
+            <td>@Html.DisplayFor(modelItem => item.TaskTag)</td>
+            <td>
+                <div class="btn-group">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">Delete</a>
+                    <a asp-action="Complete" asp-route-id="@item.Id" class="btn btn-outline-success">Complete</a>
+                </div>
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<div class="card-body" style="margin-top:4rem;" id="SecondaryTasks">
+    <h2>Secondary Tasks <a asp-action="CreateSecondary" class="btn btn-primary" style="margin-left:6rem">Add New</a></h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Where(t => t.Priority == "Secondary")){
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TaskName)</td>
+            <td>@Html.DisplayFor(modelItem => item.TaskTag)</td>
+            <td>
+                <div class="btn-group">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">Delete</a>
+                    <a asp-action="Complete" asp-route-id="@item.Id" class="btn btn-outline-success">Complete</a>
+                </div>
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<div class="card-body" style="margin-top:4rem;" id="CompletedTasks">
+    <h2>Completed Tasks</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Where(t => t.Priority == "Completed")){
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TaskName)</td>
+            <td>@Html.DisplayFor(modelItem => item.TaskTag)</td>
+        </tr>
+    }
+        </tbody>
+    </table>
+</div>
